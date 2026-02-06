@@ -24,5 +24,8 @@ def complete_task(tasks, task_id):
 
 
 def delete_task(tasks, task_id):
-    # TODO: Implementar
-    pass
+    for task in tasks:
+        if task["id"] == task_id:
+            tasks.remove(task)
+            print("Tarea eliminada")
+            return
