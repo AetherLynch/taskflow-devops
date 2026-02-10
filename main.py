@@ -17,6 +17,16 @@ def main():
         show_menu()
         option = input("Selecciona una opción: ")
 
+        #  Validar que sea un número
+        if not option.isdigit():
+            print("Error: Debes ingresar un número.")
+            continue
+
+        #  Validar rango de opciones
+        if option not in ["1", "2", "3", "4", "5"]:
+            print("Error: Opción fuera de rango.")
+            continue
+
         if option == "1":
             title = input("Título de la tarea: ")
             add_task(tasks, title)
