@@ -15,7 +15,7 @@ def main():
 
     while True:
         show_menu()
-        option = input("Selecciona una opción: ")
+        option = input("Selecciona una opción: ").strip()
 
         #  Validar que sea un número
         if not option.isdigit():
@@ -28,19 +28,28 @@ def main():
             continue
 
         if option == "1":
-            title = input("Título de la tarea: ")
+            title = input("Título de la tarea: ").strip()
             add_task(tasks, title)
+            save_tasks(tasks)
 
         elif option == "2":
             list_tasks(tasks)
 
         elif option == "3":
-            task_id = input("ID de la tarea a completar: ")
-            complete_task(tasks, task_id)
+            try:
+                task_id = int(input("ID de la tarea a completar: ").strip())
+                complete_task(tasks, task_id)
+                save_tasks(tasks)
+            except ValueError:
+                print("ID inválido. Debe ser un número.")
 
         elif option == "4":
-            task_id = input("ID de la tarea a eliminar: ")
-            delete_task(tasks, task_id)
+            try:
+                task_id = int(input("ID de la tarea a eliminar: ").strip())
+                delete_task(tasks, task_id)
+                save_tasks(tasks)
+            except ValueError:
+                print("ID inválido. Debe ser un número.")
 
         elif option == "5":
             save_tasks(tasks)
@@ -49,8 +58,6 @@ def main():
 
         else:
             print("Opción inválida")
-
-        save_tasks(tasks)
 
 if __name__ == "__main__":
     main()
