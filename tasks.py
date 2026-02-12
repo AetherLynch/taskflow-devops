@@ -147,9 +147,24 @@ def delete_task(tasks, task_id):
         None
     """
     try:
-        task_id = validar_task_id(task_id)
-        if task_id is None:
-            return  # 🔁 No se rompe el menú
+        task_id = int(task_id)
+    except:
+        print("Error: ID inválido")
+        return
 
-    except Exception as e:
-        print("❌ Error inesperado al eliminar la tarea:", e)
+    for task in tasks:
+        if task["id"] == task_id:
+            confirm = input(f"¿Seguro que deseas eliminar '{task['title']}'? (s/n): ")
+
+            if confirm.lower() != "s":
+                print("Eliminación cancelada")
+                return
+            tasks.remove(task)
+
+            for i, t in enumerate(tasks):
+                t["id"] = i + 1
+
+            print("Tarea eliminada")
+            return
+
+    print("Error: ID no encontrado")
